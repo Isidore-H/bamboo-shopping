@@ -1,0 +1,16 @@
+import axios from "axios";
+// 创建 axios 实例
+const http = axios.create({
+  baseURL: '/api',
+  timeout: 5000,
+})
+// axios 请求拦截器
+http.interceptors.request.use(config => {
+  return config
+}, e => Promise.reject(e))
+// axios 响应拦截器
+http.interceptors.response.use(res => res.data, e => {
+  return Promise.reject(e)
+})
+
+export default http
