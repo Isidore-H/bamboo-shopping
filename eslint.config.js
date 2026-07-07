@@ -20,6 +20,10 @@ export default defineConfig([
     },
   },
 
+  {
+    'vue/multi-word-component-names': 0,
+  },
+
   js.configs.recommended,
   ...pluginVue.configs['flat/essential'],
 
