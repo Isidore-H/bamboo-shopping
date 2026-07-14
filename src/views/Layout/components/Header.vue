@@ -5,12 +5,9 @@
         <router-link to="/">Bamboo</router-link>
       </h1>
       <ul class="app-header-nav">
-        <li class="home">
-          <router-link to="/">首页</router-link>
+        <li class="home" v-for="res in categoryList" :key="res.id">
+          <router-link to="/">{{ res.name }}</router-link>
         </li>
-        <li><router-link to="/">居家</router-link></li>
-        <li><router-link to="/">美食</router-link></li>
-        <li><router-link to="/">服饰</router-link></li>
       </ul>
       <div class="search">
         <i class="iconfont icon-search"></i>
@@ -21,7 +18,22 @@
 </template>
 
 <script setup>
+import { getCategoryAPI } from '@/apis/layout'
+import { onMounted, ref } from 'vue';
 
+const categoryList = ref([])
+
+const getcategoryList = async () => {
+  try {
+    const res = await getCategoryAPI()
+    categoryList.value = res.result
+  }
+  catch (error) {}
+}
+
+onMounted(() => {
+  getcategoryList()
+})
 </script>
 
 <style scoped lang="scss">
