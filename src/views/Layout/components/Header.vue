@@ -5,7 +5,10 @@
         <router-link to="/">Bamboo</router-link>
       </h1>
       <ul class="app-header-nav">
-        <li class="home" v-for="res in categoryList" :key="res.id">
+        <li class="home">
+          <router-link to="/">首页</router-link>
+        </li>
+        <li class="home" v-for="res in cagegoryStore.categoryList" :key="res.id">
           <router-link to="/">{{ res.name }}</router-link>
         </li>
       </ul>
@@ -18,22 +21,9 @@
 </template>
 
 <script setup>
-import { getCategoryAPI } from '@/apis/layout'
-import { onMounted, ref } from 'vue';
+import { useCategoryStore } from '@/stores/category'
 
-const categoryList = ref([])
-
-const getcategoryList = async () => {
-  try {
-    const res = await getCategoryAPI()
-    categoryList.value = res.result
-  }
-  catch (error) {}
-}
-
-onMounted(() => {
-  getcategoryList()
-})
+const cagegoryStore = useCategoryStore()
 </script>
 
 <style scoped lang="scss">
