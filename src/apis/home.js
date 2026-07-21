@@ -20,3 +20,10 @@ export function getHomeHotAPI() {
     method: 'get'
   })
 }
+
+export function getGoodsAPI() {
+  return http({
+    url: '/home/goods',
+    method: 'get'
+  })
+}
