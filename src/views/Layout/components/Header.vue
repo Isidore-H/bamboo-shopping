@@ -9,7 +9,7 @@
           <router-link to="/">首页</router-link>
         </li>
         <li class="home" v-for="res in cagegoryStore.categoryList" :key="res.id">
-          <router-link to="/">{{ res.name }}</router-link>
+          <router-link :to="`/category/${res.id}`">{{ res.name }}</router-link>
         </li>
       </ul>
       <div class="search">
