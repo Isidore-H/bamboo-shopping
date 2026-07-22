@@ -9,22 +9,9 @@
 </template>
 
 <script setup>
-import { getBannerAPI } from '@/apis/home'
-import { ref, onMounted } from 'vue'
+import { useBanner } from '@/composables/useBanner'
 
-const bannerList = ref([])
-
-const getBannerList = async () => {
-  try {
-    const res = await getBannerAPI()
-    bannerList.value = res.result
-  }
-  catch {}
-}
-
-onMounted(() => {
-  getBannerList()
-})
+const { bannerList } = useBanner()
 </script>
 
 <style scoped lang="scss">

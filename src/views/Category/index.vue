@@ -41,36 +41,13 @@
 </template>
 
 <script setup>
-import { getCategoryAPI } from '@/apis/category'
-import { getBannerAPI } from '@/apis/home'
-import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useCategory } from '@/composables/useCategory.js'
+import { useBanner } from '@/composables/useBanner.js'
 import GoodsItem from '../Home/components/GoodsItem.vue'
 
-const route = useRoute()
-const categoryList = ref({})
-const bannerList = ref([])
+const { categoryList } = useCategory()
+const { bannerList } = useBanner(2)
 
-const getCategoryList = async () => {
-  try {
-    const res = await getCategoryAPI(route.params.id)
-    categoryList.value = res.result
-  }
-  catch { }
-}
-
-const getBannerList = async () => {
-  try {
-    const res = await getBannerAPI(2)
-    bannerList.value = res.result
-  }
-  catch { }
-}
-
-onMounted(() => {
-  getCategoryList()
-  getBannerList()
-})
 </script>
 
 <style scoped lang="scss">
