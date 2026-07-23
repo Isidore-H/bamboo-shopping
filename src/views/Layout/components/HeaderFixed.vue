@@ -7,7 +7,7 @@
         <li class="home">
           <router-link to="/">首页</router-link>
         </li>
-        <li class="home" v-for="item in categoryStore.categoryList" :key="item.id">
+        <li class="home" v-for="item in homeCategoryStore.homeCategoryList" :key="item.id">
           <router-link active-class="active" :to="`/category/${item.id}`">{{ item.name }}</router-link>
         </li>
       </ul>
@@ -20,10 +20,10 @@
 </template>
 
 <script setup>
-import { useCategoryStore } from '@/stores/category';
+import { useHomeCategoryStore } from '@/stores/category';
 import { useScroll } from '@vueuse/core'
 
-const categoryStore = useCategoryStore()
+const homeCategoryStore = useHomeCategoryStore()
 const { y } = useScroll(window)
 </script>
 

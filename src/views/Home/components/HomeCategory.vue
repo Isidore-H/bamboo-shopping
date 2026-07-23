@@ -1,15 +1,15 @@
 <template>
   <div class="home-category">
     <ul class="menu">
-      <li v-for="item in categoryStore.categoryList" :key="item.id">
-        <RouterLink to="/">{{ item.name }}</RouterLink>
-        <RouterLink v-for="i in item.children.slice(0, 2)" :key="i.id" to="/">{{ i.name }}</RouterLink>
+      <li v-for="item in homeCategoryStore.homeCategoryList" :key="item.id">
+        <router-link to="/">{{ item.name }}</router-link>
+        <router-link v-for="i in item.children.slice(0, 2)" :key="i.id" to="/">{{ i.name }}</router-link>
         <!-- 弹层layer位置 -->
         <div class="layer">
           <h4>分类推荐 <small>根据您的购买或浏览记录推荐</small></h4>
           <ul>
             <li v-for="i in item.goods" :key="i.id">
-              <RouterLink to="/">
+              <router-link to="/">
                 <img :src="i.picture" alt="" />
                 <div class="info">
                   <p class="name ellipsis-2">
@@ -18,7 +18,7 @@
                   <p class="desc ellipsis">{{ i.desc }}</p>
                   <p class="price"><i>¥</i>{{ i.price }}</p>
                 </div>
-              </RouterLink>
+              </router-link>
             </li>
           </ul>
         </div>
@@ -28,9 +28,9 @@
 </template>
 
 <script setup>
-import { useCategoryStore } from '@/stores/category'
+import { useHomeCategoryStore } from '@/stores/category'
 
-const categoryStore = useCategoryStore()
+const homeCategoryStore = useHomeCategoryStore()
 </script>
 
 <style scoped lang="scss">

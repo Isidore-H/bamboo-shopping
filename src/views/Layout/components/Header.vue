@@ -8,7 +8,7 @@
         <li class="home">
           <router-link to="/">首页</router-link>
         </li>
-        <li class="home" v-for="res in cagegoryStore.categoryList" :key="res.id">
+        <li class="home" v-for="res in homeCategoryStore.homeCategoryList" :key="res.id">
           <router-link active-class="active" :to="`/category/${res.id}`">{{ res.name }}</router-link>
         </li>
       </ul>
@@ -21,9 +21,9 @@
 </template>
 
 <script setup>
-import { useCategoryStore } from '@/stores/category'
+import { useHomeCategoryStore } from '@/stores/category'
 
-const cagegoryStore = useCategoryStore()
+const homeCategoryStore = useHomeCategoryStore()
 </script>
 
 <style scoped lang="scss">

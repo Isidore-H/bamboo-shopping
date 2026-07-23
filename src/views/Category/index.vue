@@ -21,7 +21,7 @@
         <h3>全部分类</h3>
         <ul>
           <li v-for="item in categoryList.children" :key="item.id">
-            <router-link to="/">
+            <router-link :to="`/category/sub/${item.id}`">
               <img v-img-lazy="item.picture">
               <p>{{ item.name }}</p>
             </router-link>

@@ -2,19 +2,19 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { getHomeCategoryAPI } from '@/apis/layout.js'
 
-export const useCategoryStore = defineStore('category', () => {
-  const categoryList = ref([])
+export const useHomeCategoryStore = defineStore('category', () => {
+  const homeCategoryList = ref([])
 
-  const getcategoryList = async () => {
+  const getHomeCategoryList = async () => {
     try {
       const res = await getHomeCategoryAPI()
-      categoryList.value = res.result
+      homeCategoryList.value = res.result
     }
     catch (error) {}
   }
 
   return {
-    categoryList,
-    getcategoryList
+    homeCategoryList,
+    getHomeCategoryList
   }
 })

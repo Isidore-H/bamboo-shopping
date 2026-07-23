@@ -6,7 +6,5 @@
 </template>
 
 <style scoped lang="scss">
-.divColor {
-  color: $priceColor;
-}
+
 </style>

@@ -12,13 +12,13 @@
 import Nav from './components/Nav.vue';
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
-import { useCategoryStore } from '@/stores/category.js';
+import { useHomeCategoryStore } from '@/stores/category.js';
 import { onMounted } from 'vue';
 import HeaderFixed from './components/HeaderFixed.vue';
 
-const categoryStore = useCategoryStore()
+const homeCategoryStore = useHomeCategoryStore()
 onMounted(() => {
-  categoryStore.getcategoryList()
+  homeCategoryStore.getHomeCategoryList()
 })
 </script>
 
