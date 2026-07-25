@@ -10,3 +10,23 @@ export function getCategoryAPI(id) {
     }
   })
 }
+
+// 获取 - 二级分类数据
+export function getCategoryFilterAPI(id) {
+  return http({
+    url: '/category/sub/filter',
+    method: 'get',
+    params: {
+      id
+    }
+  })
+}
+
+// 请求 - 二级分类商品数据
+export function postCategoryGoodsTemporaryAPI(data) {
+  return http({
+    url: '/category/goods/temporary',
+    method: 'post',
+    data
+  })
+}

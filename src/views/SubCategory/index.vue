@@ -4,25 +4,72 @@
     <div class="bread-container">
       <el-breadcrumb separator=">">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: '/' }">居家</el-breadcrumb-item>
-        <el-breadcrumb-item>居家生活用品</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: `/category/${categoryFilterList.parentId}` }">{{ categoryFilterList.parentName }}</el-breadcrumb-item>
+        <el-breadcrumb-item>{{ categoryFilterList.name }}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="sub-container">
-      <el-tabs>
-        <el-tab-pane label="最新商品" name="latestProducts">1</el-tab-pane>
-        <el-tab-pane label="最高人气" name="mostPopular">2</el-tab-pane>
-        <el-tab-pane label="评论最多" name="mostCommented">3</el-tab-pane>
+      <el-tabs v-model="activeName" @tab-change="tabChange">
+        <el-tab-pane label="最新商品" name="publishTime"></el-tab-pane>
+        <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
+        <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
       </el-tabs>
-    </div>
-    <div class="body">
-      <!-- 商品列表-->
+      <div class="body" v-infinite-scroll="load" :infinite-scroll-disabled="disabled">
+        <!-- 商品列表-->
+        <GoodsItem v-for="item in categoryGoodsTemporaryList" :goods="item"></GoodsItem>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { getCategoryFilterAPI, postCategoryGoodsTemporaryAPI } from '@/apis/category'
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import GoodsItem from '../Home/components/GoodsItem.vue';
 
+const route = useRoute()
+const categoryFilterList = ref({})
+const categoryGoodsTemporaryList = ref({})
+const activeName = ref('publishTime')
+const disabled = ref(false)
+
+const getCategoryFilter = async () => {
+  const res = await getCategoryFilterAPI(route.params.id)
+  categoryFilterList.value = res.result
+}
+
+const categoryParams = ref({
+  categoryId: route.params.id,
+  page: 1,
+  pageSize: 20,
+  sortField: 'publishTime'
+})
+
+const postCategoryGoodsTemporaryList = async () => {
+  const res = await postCategoryGoodsTemporaryAPI(categoryParams.value)
+  categoryGoodsTemporaryList.value = res.result.items
+}
+
+const tabChange = () => {
+  categoryParams.value.sortField = activeName.value
+  categoryParams.value.page = 1
+  postCategoryGoodsTemporaryList()
+}
+
+const load = async () => {
+  categoryParams.value.page++
+  const res = await postCategoryGoodsTemporaryAPI(categoryParams.value)
+  categoryGoodsTemporaryList.value = [...categoryGoodsTemporaryList.value, ...res.result.items]
+  if (res.result.items.length <= 0) {
+    disabled.value = true
+  }
+}
+
+onMounted(() => {
+  getCategoryFilter()
+  postCategoryGoodsTemporaryList()
+})
 </script>
 
 <style scoped lang="scss">
