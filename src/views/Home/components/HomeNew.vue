@@ -3,7 +3,7 @@
     <template #main>
       <ul class="goods-list">
         <li v-for="item in homeNewList" :key="item.id">
-          <router-link to="/">
+          <router-link :to="`/detail/${item.id}`">
             <img :src="item.picture" alt="" />
             <p class="name">{{ item.name }}</p>
             <p class="price">&yen;{{ item.price }}</p>

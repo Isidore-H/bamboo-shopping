@@ -3,7 +3,7 @@
     <div class="container">
       <ul>
         <template v-if="true">
-          <li><a href="javascript: ;"><i class="iconfont icon-user"></i>周杰伦</a></li>
+          <li><a href="javascript: ;"><i class="iconfont icon-user"></i>广东陈冠希</a></li>
           <li>
             <el-popconfirm title="确定要退出吗？" confirm-button-text="确定" cancel-button-text="取消">
               <template #reference>
