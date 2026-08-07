@@ -94,6 +94,9 @@
             </div>
             <div class="goods-aside">
               <!-- 24小时热榜 + 专题推荐 -->
+               <!-- type:  1代表24小时热榜  2代表周热榜  3代表总热销榜 -->
+               <GoodsHot :type="1"></GoodsHot>
+               <GoodsHot :type="2"></GoodsHot>
             </div>
           </div>
         </div>
@@ -106,6 +109,7 @@
 import { getGoodsDetailAPI } from '@/apis/detail'
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import GoodsHot from './components/GoodsHot.vue';
 
 const goodsDetailList = ref({})
 const route = useRoute()
