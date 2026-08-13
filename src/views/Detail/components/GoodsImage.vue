@@ -50,10 +50,10 @@ watch([elementX, elementY, isOutside], () => {
     top.value = elementY.value - 100
   }
   // 边界设定
-  if (elementX.value <= 100) left.value === 0
-  if (elementX.value >= 300) left.value === 200
-  if (elementY.value <= 100) top.value === 0
-  if (elementY.value >= 300) top.value === 200
+  if (elementX.value <= 100) left.value = 0
+  if (elementX.value >= 300) left.value = 200
+  if (elementY.value <= 100) top.value = 0
+  if (elementY.value >= 300) top.value = 200
   // 大图位置
   positionX.value =  - left.value * 2
   positionY.value = - top.value * 2
