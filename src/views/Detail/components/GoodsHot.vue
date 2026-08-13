@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { getGoodsHot } from '@/apis/detail'
 import { computed, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
