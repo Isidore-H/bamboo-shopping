@@ -19,15 +19,15 @@
         </nav>
         <div class="account-box">
           <div class="form">
-            <el-form label-position="right" label-width="60px">
-              <el-form-item label="账户">
-                <el-input></el-input>
+            <el-form label-position="right" label-width="60px" :model="userForm" :rules="rules" status-icon>
+              <el-form-item label="账户" prop="account">
+                <el-input v-model="userForm.account"></el-input>
               </el-form-item>
-              <el-form-item label="密码">
-                <el-input></el-input>
+              <el-form-item label="密码" prop="password">
+                <el-input v-model="userForm.password"></el-input>
               </el-form-item>
-              <el-form-item label-width="22px">
-                <el-checkbox size="large">
+              <el-form-item label-width="22px" prop="agree">
+                <el-checkbox size="large" v-model="userForm.agree">
                   我已同意隐私条款和服务条款
                 </el-checkbox>
               </el-form-item>
@@ -55,7 +55,30 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 
+const userForm = ref({
+  account: '',
+  password: '',
+  agree: false,
+})
+
+const rules = {
+  account: [
+    { required: true, message: '用户名不能为空' }
+  ],
+  password: [
+    { required: true, message: '密码不能为空' },
+    { min: 6, max: 14, message: '密码长度要求6-14位字符' }
+  ],
+  agree: [
+    {
+      validator: (rule, value, callback) => {
+        return value ? callback() : new Error('请先勾选条款')
+      }
+    }
+  ]
+}
 </script>
 
 <style scoped lang="scss">
