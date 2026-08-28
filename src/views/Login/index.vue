@@ -19,7 +19,7 @@
         </nav>
         <div class="account-box">
           <div class="form">
-            <el-form label-position="right" label-width="60px" :model="userForm" :rules="rules" status-icon>
+            <el-form ref="formRef" label-position="right" label-width="60px" :model="userForm" :rules="rules" status-icon>
               <el-form-item label="账户" prop="account">
                 <el-input v-model="userForm.account"></el-input>
               </el-form-item>
@@ -31,7 +31,7 @@
                   我已同意隐私条款和服务条款
                 </el-checkbox>
               </el-form-item>
-              <el-button size="large" class="subBtn">点击登录</el-button>
+              <el-button size="large" class="subBtn" @click="doLogin">点击登录</el-button>
             </el-form>
           </div>
         </div>
@@ -55,7 +55,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
+import { ElMessage } from 'element-plus'
+import { useRouter } from 'vue-router'
+import { postLoginApi } from '@/apis/user'
+
+const formRef = ref()
+const router = useRouter()
 
 const userForm = ref({
   account: '',
@@ -78,6 +84,17 @@ const rules = {
       }
     }
   ]
+}
+
+const doLogin = () => {
+  const { account, password } = userForm.value
+  formRef.value.validate(async (valid) => {
+    if (valid) {
+      await postLoginApi({ account, password })
+      ElMessage({ type: 'success', message: '登录成功' })
+      router.replace({ path: '/' })
+    }
+  })
 }
 </script>
 
