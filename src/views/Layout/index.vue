@@ -17,6 +17,7 @@ import { onMounted } from 'vue';
 import HeaderFixed from './components/HeaderFixed.vue';
 
 const homeCategoryStore = useHomeCategoryStore()
+
 onMounted(() => {
   homeCategoryStore.getHomeCategoryList()
 })
