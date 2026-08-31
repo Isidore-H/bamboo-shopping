@@ -111,7 +111,6 @@ import { getGoodsDetailAPI } from '@/apis/detail'
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import GoodsHot from './components/GoodsHot.vue';
-import GoodsImage from './components/GoodsImage.vue';
 
 const goodsDetailList = ref({})
 const route = useRoute()

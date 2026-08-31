@@ -58,7 +58,8 @@
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
-import { postLoginApi } from '@/apis/user'
+import { useUserStore } from '@/stores/user'
+import 'element-plus/theme-chalk/el-message.css'
 
 const formRef = ref()
 const router = useRouter()
@@ -86,11 +87,13 @@ const rules = {
   ]
 }
 
+const userStore = useUserStore()
+
 const doLogin = () => {
   const { account, password } = userForm.value
   formRef.value.validate(async (valid) => {
     if (valid) {
-      await postLoginApi({ account, password })
+      await userStore.getUserInfo(account, password)
       ElMessage({ type: 'success', message: '登录成功' })
       router.replace({ path: '/' })
     }

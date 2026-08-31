@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { postLoginApi } from '@/apis/user'
+import { ref } from "vue";
 
 export const useUserStore = defineStore('user', () => {
   const userInfo = ref({})
