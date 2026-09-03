@@ -16,6 +16,7 @@
         <i class="iconfont icon-search"></i>
         <input type="text" placeholder="搜一搜">
       </div>
+      <Card></Card>
     </div>
   </header>
 </template>
