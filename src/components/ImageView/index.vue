@@ -35,6 +35,7 @@ const left = ref(0)
 const top = ref(0)
 const positionX = ref(0)
 const positionY = ref(0)
+const imageList = ref([])
 
 const intendedTarget = (i) => {
   curIndex.value = i
@@ -66,7 +67,9 @@ const props = defineProps({
   }
 })
 
-const imageList = props.mainPictures
+watch(() => props.mainPictures, (val) => {
+  imageList.value = val
+}, { immediate: true })
 </script>
 
 <style lang="scss" scoped>

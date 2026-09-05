@@ -64,6 +64,7 @@
                 </dl>
               </div>
               <!-- sku组件 -->
+               <BbsSku :goods="goodsDetailList"></BbsSku>
               <!-- 数据组件 -->
               <!-- 按钮组件 -->
               <div>
