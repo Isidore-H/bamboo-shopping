@@ -25,7 +25,7 @@
       <div class="foot">
         <div class="total">
           <p>共{{ cartStore.allCount }}件商品</p>
-          <p>&yen;{{ cartStore.allPrice.toFixed(2) }}</p>
+          <p>&yen;{{ (cartStore.allPrice ?? 0).toFixed(2) }}</p>
         </div>
         <el-button size="large" type="primary" @click="router.push('/cartlist')">去购物车结算</el-button>
       </div>
@@ -39,6 +39,8 @@ import { useRouter } from 'vue-router';
 
 const cartStore = useCartStore()
 const router = useRouter()
+
+console.log(cartStore.cartStoreList)
 </script>
 
 <style lang="scss" scoped>

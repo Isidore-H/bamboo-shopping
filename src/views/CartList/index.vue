@@ -16,7 +16,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in cartList">
+            <tr v-for="item in cartStore.cartStoreList" :key="item.id">
               <td>
                 <el-checkbox></el-checkbox>
               </td>
@@ -49,7 +49,7 @@
                 </p>
               </td>
             </tr>
-            <tr v-if="cartList.length === 0">
+            <tr v-if="cartStore.cartStoreList.length === 0">
               <td colspan="6">
                 <div class="cartNone">
                   <el-empty description="购物车列表为空">
@@ -75,9 +75,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { useCartStore } from '@/stores/cartStore'
 
-const cartList = ref([])
+const cartStore = useCartStore()
 </script>
 
 <style lang="scss" scoped>

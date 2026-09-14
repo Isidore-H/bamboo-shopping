@@ -64,11 +64,11 @@
                 </dl>
               </div>
               <!-- sku组件 -->
-               <BbsSku :goods="goodsDetailList"></BbsSku>
+               <BbsSku :goods="goodsDetailList" @change="getSkuInfo"></BbsSku>
               <!-- 数据组件 -->
               <!-- 按钮组件 -->
               <div>
-                <el-button size="large" class="btn">
+                <el-button size="large" class="btn" @click="cartStore.addCartStore(skuInfo)">
                   加入购物车
                 </el-button>
               </div>
@@ -111,14 +111,22 @@
 import { getGoodsDetailAPI } from '@/apis/detail'
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import { useCartStore } from '@/stores/cartStore.js'
 import GoodsHot from './components/GoodsHot.vue';
 
 const goodsDetailList = ref({})
 const route = useRoute()
+const skuInfo = ref({})
+const cartStore = useCartStore()
 
 const getGoodsDetailList = async () => {
   const res = await getGoodsDetailAPI(route.params.id)
   goodsDetailList.value = res.result
+}
+
+const getSkuInfo = (info) => {
+  skuInfo.value = info
+  console.log(skuInfo.value)
 }
 
 onMounted(() => {
