@@ -6,7 +6,7 @@
           <thead>
             <tr>
               <th width="120px">
-                <el-checkbox></el-checkbox>
+                <el-checkbox :modelValue="cartStore.isAll" @change="allCheck"></el-checkbox>
               </th>
               <th width="400">商品信息</th>
               <th width="220">单价</th>
@@ -18,7 +18,7 @@
           <tbody>
             <tr v-for="item in cartStore.cartStoreList" :key="item.id">
               <td>
-                <el-checkbox></el-checkbox>
+                <el-checkbox :modelValue="item.selected" @change="(selected) => singleCheck(item, selected)"></el-checkbox>
               </td>
               <td>
                 <div class="goods">
@@ -78,6 +78,14 @@
 import { useCartStore } from '@/stores/cartStore'
 
 const cartStore = useCartStore()
+
+const singleCheck = (skuInfo, selected) => {
+  cartStore.singleCheck(skuInfo.skuId, selected)
+}
+
+const allCheck = (selected) => {
+  cartStore.allCheck(selected)
+}
 </script>
 
 <style lang="scss" scoped>

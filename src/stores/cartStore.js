@@ -18,6 +18,15 @@ export const useCartStore = defineStore('cartStore', () => {
     cartStoreList.value.splice(delId, 1)
   }
 
+  const singleCheck = (skuId, selected) => {
+    const item = cartStoreList.value.find(i => i.skuId === skuId)
+    item.selected === selected
+  }
+
+  const allCheck = (selected) => {
+    cartStoreList.value.forEach(i => i.selected === selected)
+  }
+
   // 商品总数
   const allCount = computed(() => {
     return cartStoreList.value.reduce((count, item) => {
@@ -32,12 +41,20 @@ export const useCartStore = defineStore('cartStore', () => {
     }, 0)
   })
 
+  // 是否全选
+  const isAll = computed(() => {
+    cartStoreList.value.every(i => i.selected)
+  })
+
   return {
     cartStoreList,
     addCartStore,
     delCartStore,
+    singleCheck,
+    allCheck,
     allCount,
-    allPrice
+    allPrice,
+    isAll
   }
 }, {
   persist: true
