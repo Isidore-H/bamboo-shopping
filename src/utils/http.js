@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useUserStore } from '@/stores/user'
+import { ElMessage } from 'element-plus'
+import 'element-plus/theme-chalk/el-message.css'
 // 创建 axios 实例
 const http = axios.create({
   baseURL: '/api',
@@ -16,6 +18,10 @@ http.interceptors.request.use(config => {
 }, e => Promise.reject(e))
 // axios 响应拦截器
 http.interceptors.response.use(res => res.data, e => {
+  ElMessage({
+    type: 'warning',
+    message: e.response.data.message
+  })
   return Promise.reject(e)
 })
 

@@ -2,7 +2,7 @@
   <nav class="app-topnav">
     <div class="container">
       <ul>
-        <template v-if="isLogin">
+        <template v-if="userStore.userInfo.token">
           <li><a href="javascript: ;"><i class="iconfont icon-user"></i>广东陈冠希</a></li>
           <li>
             <el-popconfirm title="确定要退出吗？" confirm-button-text="确定" cancel-button-text="取消" @confirm="quitLogin">
@@ -29,12 +29,10 @@ import { useRouter } from 'vue-router';
 import { useUserStore } from '@/stores/user'
 
 const router = useRouter()
-const isLogin = JSON.parse(localStorage.getItem('user')).userInfo.account
 const userStore = useUserStore()
 
 const quitLogin = () => {
   userStore.clearUserInfo()
-  localStorage.removeItem('user')
   router.push('/login')
 }
 </script>
