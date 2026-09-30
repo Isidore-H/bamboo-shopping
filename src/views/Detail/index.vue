@@ -66,9 +66,10 @@
               <!-- sku组件 -->
                <BbsSku :goods="goodsDetailList" @change="getSkuInfo"></BbsSku>
               <!-- 数据组件 -->
+               <el-input-number v-model="count" :min="1" :max="999" />
               <!-- 按钮组件 -->
               <div>
-                <el-button size="large" class="btn" @click="cartStore.addCartStore(skuInfo)">
+                <el-button size="large" class="btn" @click="addCart">
                   加入购物车
                 </el-button>
               </div>
@@ -112,12 +113,14 @@ import { getGoodsDetailAPI } from '@/apis/detail'
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useCartStore } from '@/stores/cartStore.js'
+import { ElMessage } from 'element-plus'
 import GoodsHot from './components/GoodsHot.vue';
 
 const goodsDetailList = ref({})
 const route = useRoute()
 const skuInfo = ref({})
 const cartStore = useCartStore()
+const count = ref(1)
 
 const getGoodsDetailList = async () => {
   const res = await getGoodsDetailAPI(route.params.id)
@@ -126,7 +129,23 @@ const getGoodsDetailList = async () => {
 
 const getSkuInfo = (info) => {
   skuInfo.value = info
-  console.log(skuInfo.value)
+}
+
+const addCart = () => {
+  if (skuInfo.value.skuId) {
+    cartStore.addCartStore({
+      id: goodsDetailList.value.id,
+      name: goodsDetailList.value.name,
+      picture: goodsDetailList.value.mainPictures[0],
+      price: goodsDetailList.value.price,
+      count: count.value,
+      skuId: skuInfo.value.skuId,
+      attrsText: skuInfo.value.specsText,
+      selected: true,
+    })
+  } else {
+    ElMessage.warning('请先选择商品规格')
+  }
 }
 
 onMounted(() => {

@@ -7,7 +7,7 @@ export const useCartStore = defineStore('cartStore', () => {
   const addCartStore = (goods) => {
     const isExist = cartStoreList.value.find((item) => item.skuId === goods.skuId)
     if (isExist) {
-      isExist.count++
+      isExist.count += goods.count
     } else {
       cartStoreList.value.push(goods)
     }
