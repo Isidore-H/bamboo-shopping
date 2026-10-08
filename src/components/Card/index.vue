@@ -39,8 +39,6 @@ import { useRouter } from 'vue-router';
 
 const cartStore = useCartStore()
 const router = useRouter()
-
-console.log(cartStore.cartStoreList)
 </script>
 
 <style lang="scss" scoped>

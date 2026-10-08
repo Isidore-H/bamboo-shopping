@@ -41,7 +41,7 @@
               </td>
               <td class="tc">
                 <p>
-                  <el-popconfirm title="确认删除吗" confirm-button-text="确认" cancel-button-text="取消" @confirm="delCart(item)">
+                  <el-popconfirm title="确认删除吗" confirm-button-text="确认" cancel-button-text="取消" @confirm="cartStore.delCartStore(item)">
                     <template #reference>
                       <a href="javascript:;">删除</a>
                     </template>
@@ -63,8 +63,8 @@
       </div>
       <div class="action">
         <div class="batch">
-          共 10 件商品，已选择 2 件，商品合计：
-          <span class="red">¥ 200.00 </span>
+          共 {{ cartStore.allCount }} 件商品，已选择 {{ cartStore.selectCount }} 件，商品合计：
+          <span class="red">¥ {{ cartStore.selectPrice.toFixed(2) }} </span>
         </div>
         <div class="total">
           <el-button size="large" type="primary" >下单结算</el-button>
