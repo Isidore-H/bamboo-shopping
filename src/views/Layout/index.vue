@@ -12,7 +12,7 @@
 import Nav from './components/Nav.vue';
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
-import { useHomeCategoryStore } from '@/stores/category.js';
+import { useHomeCategoryStore } from '@/stores/categoryStore.js';
 import { onMounted } from 'vue';
 import HeaderFixed from './components/HeaderFixed.vue';
 

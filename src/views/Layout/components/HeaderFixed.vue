@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { useHomeCategoryStore } from '@/stores/category';
+import { useHomeCategoryStore } from '@/stores/categoryStore';
 import { useScroll } from '@vueuse/core'
 
 const homeCategoryStore = useHomeCategoryStore()

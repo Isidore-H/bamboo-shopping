@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores/userStore'
 import { postCart, getCart, deleteCart } from '@/apis/cart'
 
 export const useCartStore = defineStore('cartStore', () => {
@@ -10,12 +10,16 @@ export const useCartStore = defineStore('cartStore', () => {
 
   const isLogin = computed(() => userStore.userInfo.token)
 
+  const updateNewList = async () => {
+    const res = await getCart()
+    cartStoreList.value = res.result
+  }
+
   const addCartStore = async (goods) => {
     if (isLogin.value) {
       const { skuId, count } = goods
       await postCart({ skuId, count })
-      const res = await getCart()
-      cartStoreList.value = res.result
+      updateNewList()
     }
     else {
       const isExist = cartStoreList.value.find((item) => item.skuId === goods.skuId)
@@ -30,6 +34,7 @@ export const useCartStore = defineStore('cartStore', () => {
   const delCartStore = async (skuId) => {
     if (isLogin.value) {
       await deleteCart([skuId])
+      updateNewList()
     } else {
       const ids = cartStoreList.value.findIndex((item) => item.skuId === skuId)
       cartStoreList.value.splice(ids, 1)

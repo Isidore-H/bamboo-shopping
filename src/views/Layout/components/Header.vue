@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { useHomeCategoryStore } from '@/stores/category'
+import { useHomeCategoryStore } from '@/stores/categoryStore'
 
 const homeCategoryStore = useHomeCategoryStore()
 </script>
