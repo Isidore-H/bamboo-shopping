@@ -12,9 +12,17 @@ export function postCart({ skuId, count }) {
   })
 }
 
+// 获取 购物车列表
+export function getCart() {
+  return http({
+    url: '/member/cart',
+    method: 'get'
+  })
+}
+
 // 删除 购物车
 export function deleteCart(ids) {
-  http({
+  return http({
     url: '/member/cart',
     method: 'delete',
     data: {

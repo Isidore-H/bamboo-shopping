@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { useUserStore } from '@/stores/user'
-import { postCart, deleteCart } from '@/apis/cart'
+import { postCart, getCart, deleteCart } from '@/apis/cart'
 
 export const useCartStore = defineStore('cartStore', () => {
   const cartStoreList = ref([])
@@ -14,6 +14,8 @@ export const useCartStore = defineStore('cartStore', () => {
     if (isLogin.value) {
       const { skuId, count } = goods
       await postCart({ skuId, count })
+      const res = await getCart()
+      cartStoreList.value = res.result
     }
     else {
       const isExist = cartStoreList.value.find((item) => item.skuId === goods.skuId)
