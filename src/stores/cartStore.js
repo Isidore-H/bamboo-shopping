@@ -15,6 +15,10 @@ export const useCartStore = defineStore('cartStore', () => {
     cartStoreList.value = res.result
   }
 
+  const clearCart = () => {
+    cartStoreList.value = []
+  }
+
   const addCartStore = async (goods) => {
     if (isLogin.value) {
       const { skuId, count } = goods
@@ -77,6 +81,7 @@ export const useCartStore = defineStore('cartStore', () => {
 
   return {
     cartStoreList,
+    clearCart,
     addCartStore,
     delCartStore,
     singleCheck,
