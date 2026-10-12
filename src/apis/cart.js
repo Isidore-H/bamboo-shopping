@@ -30,3 +30,12 @@ export function deleteCart(ids) {
     }
   })
 }
+
+// 合并 购物车
+export function mergeCart(data) {
+  return http({
+    url: '/member/cart/merge',
+    method: 'post',
+    data
+  })
+}
