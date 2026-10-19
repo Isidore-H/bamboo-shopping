@@ -99,8 +99,24 @@
 </template>
 
 <script setup>
-const checkInfo = {}  // 订单对象
-const curAddress = {}  // 地址对象
+import { getOrderPreApi } from '@/apis/order'
+import { onMounted, ref } from 'vue'
+
+const checkInfo =ref({})  // 订单对象
+const curAddress =ref({})  // 地址对象
+
+const getOrderPre = async () => {
+  try {
+    const res = await getOrderPreApi()
+    checkInfo.value = res.result
+    curAddress.value = res.result.userAddresses[0]
+  }
+  catch {}
+}
+
+onMounted(() => {
+  getOrderPre()
+})
 </script>
 
 <style scoped lang="scss">
