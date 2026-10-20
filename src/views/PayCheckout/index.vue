@@ -44,10 +44,10 @@
                     </div>
                   </a>
                 </td>
-                <td>&yen;{{ i.price }}</td>
-                <td>{{ i.price }}</td>
-                <td>&yen;{{ i.totalPrice }}</td>
-                <td>&yen;{{ i.totalPayPrice }}</td>
+                <td>&yen;{{ item.price }}</td>
+                <td>{{ item.count }}</td>
+                <td>&yen;{{ item.totalPrice }}</td>
+                <td>&yen;{{ item.totalPayPrice }}</td>
               </tr>
             </tbody>
           </table>
@@ -113,7 +113,7 @@
     <template #footer>
       <div class="dialog-footer">
         <el-button @click="toggleFlag = false">取消</el-button>
-        <el-button type="primary">确定</el-button>
+        <el-button type="primary" @click="confirm()">确定</el-button>
       </div>
     </template>
   </el-dialog>
@@ -126,7 +126,7 @@ import { onMounted, ref } from 'vue'
 
 const checkInfo =ref({})  // 订单对象
 const curAddress =ref({})  // 地址对象
-const addressObj = ref({})
+const addressObj = ref({})  // 选择的地址对象
 
 const toggleFlag = ref(false)
 
@@ -141,6 +141,11 @@ const getOrderPre = async () => {
 
 const switchAddress = (item) => {
   addressObj.value = item
+}
+
+const confirm = () => {
+  curAddress.value = addressObj.value
+  toggleFlag.value = false
 }
 
 onMounted(() => {
