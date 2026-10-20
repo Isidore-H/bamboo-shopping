@@ -89,7 +89,7 @@
         </div>
         <!-- 提交订单 -->
         <div class="submit">
-          <el-button type="primary" size="large">提交订单</el-button>
+          <el-button type="primary" size="large" @click="router.push('/paypage')">提交订单</el-button>
         </div>
       </div>
     </div>
@@ -123,10 +123,12 @@
 <script setup>
 import { getOrderPreApi } from '@/apis/order'
 import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const checkInfo =ref({})  // 订单对象
 const curAddress =ref({})  // 地址对象
 const addressObj = ref({})  // 选择的地址对象
+const router = useRouter()
 
 const toggleFlag = ref(false)
 
