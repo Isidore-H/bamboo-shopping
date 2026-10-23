@@ -89,7 +89,7 @@
         </div>
         <!-- 提交订单 -->
         <div class="submit">
-          <el-button type="primary" size="large" @click="router.push('/paypage')">提交订单</el-button>
+          <el-button type="primary" size="large" @click="submitOrder">提交订单</el-button>
         </div>
       </div>
     </div>
@@ -124,6 +124,7 @@
 import { getOrderPreApi } from '@/apis/order'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { postOrderApi } from '@/apis/order'
 
 const checkInfo =ref({})  // 订单对象
 const curAddress =ref({})  // 地址对象
@@ -148,6 +149,29 @@ const switchAddress = (item) => {
 const confirm = () => {
   curAddress.value = addressObj.value
   toggleFlag.value = false
+}
+
+const submitOrder = async () => {
+  const res = await postOrderApi({
+    deliveryTimeType: 1,
+    payType: 1,
+    payChannel: 1,
+    buyerMessage: '',
+    goods: checkInfo.value.goods.map(item => {
+      return {
+        skuId: item.skuId,
+        count: item.count
+      }
+    }),
+    addressId: curAddress.value.id
+  })
+  const orderId = res.result.id
+  router.push({
+    path: '/paypage',
+    query: {
+      id: orderId
+    }
+  })
 }
 
 onMounted(() => {

@@ -41,7 +41,7 @@ const router = createRouter({
           component: PayCheckout,
         },
         {
-          path: '/paypage',
+          path: '/paypage/:id',
           component: PayPage,
         }
       ]
